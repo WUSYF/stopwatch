@@ -58,13 +58,22 @@ public class Main extends Application {
             grid.add(currentTime, 1, 1,2,1);
             grid.add(date, 1, 2, 2, 1);
 
+        //TIMERS
+            //update Time
+            Timer watchTimer = new Timer();
+            watchTimer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    currentTime.setText(dtft.format(LocalDateTime.now()));
+                }
+            }, 0, 1000);
 
-            //TIMER UPDATE TIME
-        Timer watchTimer = new Timer();
-        watchTimer.scheduleAtFixedRate(new TimerTask() {
+            //update Date
+        Timer dateTimer = new Timer();
+        dateTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                currentTime.setText(dtft.format(LocalDateTime.now()));
+                date.setText(dtf.format(LocalDateTime.now()));
             }
         }, 0, 1000);
 
