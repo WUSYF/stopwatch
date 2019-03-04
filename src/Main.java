@@ -26,7 +26,6 @@ public class Main extends Application {
     //UHRZEIT GETTEN
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     DateTimeFormatter dtft = DateTimeFormatter.ofPattern("HH:mm:ss");
-    LocalDateTime now = LocalDateTime.now();
 
     @Override
     public void start(Stage primaryStage) {
@@ -51,8 +50,8 @@ public class Main extends Application {
             grid.add(titleDate, 0, 2);
 
             //times
-            Text currentTime = new Text(dtft.format(now));
-            Text date = new Text(dtf.format(now));
+            Text currentTime = new Text(dtft.format(LocalDateTime.now()));
+            Text date = new Text(dtf.format(LocalDateTime.now()));
 
             grid.add(currentTime, 1, 1,2,1);
             grid.add(date, 1, 2, 2, 1);
@@ -60,19 +59,20 @@ public class Main extends Application {
 
         //BUTTON + EVENT HANDLER BSP
         Button btn = new Button();
-        btn.setText("Say 'Hello World'");
+        btn.setText("Update Time");
+        grid.add(btn, 3,1);
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+                currentTime.setText(dtft.format(LocalDateTime.now()));
             }
         });
 
         //JAVAFX STARTEN
         //grid.setGridLinesVisible(true);
         Scene scene = new Scene(grid, w, h);
-        primaryStage.setTitle(dtf.format(now));
+        primaryStage.setTitle(dtf.format(LocalDateTime.now()));
         primaryStage.setScene(scene);
         primaryStage.show();
     }
