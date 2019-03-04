@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main extends Application {
     //VARAIABLEN FÜR DIE GRÖßE
@@ -57,17 +59,14 @@ public class Main extends Application {
             grid.add(date, 1, 2, 2, 1);
 
 
-        //BUTTON + EVENT HANDLER BSP
-        Button btn = new Button();
-        btn.setText("Update Time");
-        grid.add(btn, 3,1);
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
+            //TIMER UPDATE TIME
+        Timer watchTimer = new Timer();
+        watchTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
-            public void handle(ActionEvent event) {
+            public void run() {
                 currentTime.setText(dtft.format(LocalDateTime.now()));
             }
-        });
+        }, 0, 1000);
 
         //JAVAFX STARTEN
         //grid.setGridLinesVisible(true);
